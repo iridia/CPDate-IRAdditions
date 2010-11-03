@@ -32,7 +32,7 @@
 
 - (CPDate) midnightDate {
 	
-	return [CPDate dateByUTCYear:self.getFullYear() month:(self.getMonth() + 1) day:self.getDay() withTimezoneOffset:YES];
+	return [CPDate dateByUTCYear:self.getFullYear() month:(self.getMonth() + 1) day:self.getDate() withTimezoneOffset:YES];
 	
 }
 
