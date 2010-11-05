@@ -42,6 +42,12 @@
 	
 }
 
++ (CPDate) dateFromPHPString:(CPString)inString withOffset:(BOOL)inWithOffset {
+	
+	return new Date(+Date.fromPHP(inString) + (new Date()).getTimezoneOffset() * 60 * 1000 * (inWithOffset ? 1 : 0));
+	
+}
+
 - (CPDate) day { return self.getDay(); }
 - (CPDate) nextDay { return self.nextDay(); }
 - (CPDate) previousDay { return self.previousDay(); }
@@ -243,6 +249,17 @@ Date.prototype.format = function(formatString) {
 
 
 
+	//	PHP: "2010-07-10 16:00:00"
+	
+	Date.fromPHP = function (inString) {
+		
+		var elements = inString.match(/(\d{4})-(\d{2})-(\d{2}) (\d{2}):(\d{2}):(\d{2})/);
+		elements.shift();
+		
+		return new Date(Date.UTC.apply(this, elements));
+		
+	}
+	
 	//	ISO 8601: "2010-07-10T16:00:00.000+08:00"
 
 	Date.fromISO8601 = function (inString) {
